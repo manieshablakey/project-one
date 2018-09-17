@@ -27,6 +27,13 @@ var flipCard = function(event) {
 	cardSelected.style.backgroundColor = cardColors;
 	cardsTurnedOver.push(cardsArray[cardSelectedId].color);
 	//console.log("This is cardsTurnedOVer array: " + cardsTurnedOver);
+		if (cardsTurnedOver.length === 2) {
+			if (cardsTurnedOver[0] === cardsTurnedOver[1]) {
+			alert("You found a match!");
+			} else {
+			alert("Sorry, try again.")
+			}
+		}
 }
 
 //Create a board of cards to play.
@@ -42,22 +49,10 @@ var createCards = function() {
 		div.appendChild(card);		
 	}
 }
-
 createCards();
 
-//Created function for checking if 2 cards match
-// var checkForMatch = function() {
-// 	cardsTurnedOver;
-// 	if ((cardsTurnedOver.length !== 0) && (cardsTurnedOver.length === 2)) {
-// 		checkForMatch();
-// 		if (cardsTurnedOver[0] === cardsTurnedOver[1]) {
-// 			alert("You found a match!");
-// 		} else {
-// 			alert("Sorry, try again.")
-// 		}
-// 	}
-// }
-// checkForMatch();
+
+
 
 
 
