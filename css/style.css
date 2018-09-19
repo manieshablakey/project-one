@@ -1,29 +1,78 @@
+
+/*Main container that holds the individual card items. */
 #container {
-   display: inline-flex;
+   display: flex;
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
+   margin: 0 auto;
+   width: 1200px;
 
 }
 
+/*Each individual card item.*/
 .card {
 	height: 150px;
-	width: 120px;
+	width: 110px;
 	border: 5px solid black;
 	border-radius: 10px;
-	background-color: #588c7e;
-	color: #588c7e ;
-	margin: 20px;
+	background-color: #618685;
+	color: #618685;
+	margin: 15px;
 	text-align: center;
 	line-height: 130px;
-	font-size: 20px;
+	font-size: 30px;
 	font-family: "Walter Turncoat", cursive;
-
-
 }
 
+/*Game title: Color Matching Game*/
 h1 {
 	text-align: center;
-	font-weight: 12px;
+	font-weight: bold;
+	color:  #c83349;
+	margin: 0px 10px 10px 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 80px;
+	text-shadow: 2px 2px;
 	font-family: "Walter Turncoat", cursive;
+}
+
+/*Button-like feature: 'It's a match'*/
+ #divOne {
+	font-family: "Walter Turncoat", cursive;
+	font-size: 20px;
+	border: 5px solid #618685;
+	border-radius: 10px;
+	background-color:  #fefbd8;
+	color: #c94c4c;
+	padding: 5px 45px;
+	margin: 30px 50px;
+	float: right;
+	text-shadow: 1px 1px;
+	animation-name: changeColor;
+	animation-delay: 1s;
+	animation-duration: 3s;
+}
+
+/*Button-like feature: "No match"*/
+#divTwo {
+	font-family: "Walter Turncoat", cursive;
+	font-size: 20px;
+	border: 5px solid #618685;
+	border-radius: 10px;
+	background-color:  #fefbd8;
+	color: #c94c4c;
+	padding: 5px;
+	margin: 30px 50px;
+	float: left;
+	text-shadow: 1px 1px;
+	animation-name: changeColor;
+	animation-delay: 1s;
+	animation-duration: 3s;
+}
+
+@keyframes changeColor {
+	from {background-color: #fefbd8;}
+    to {background-color: #80ced6;}
 }
