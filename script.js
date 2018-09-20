@@ -47,7 +47,10 @@ var cardsTurnedOver = [];
 // //Check for end of game.
 var checkGameEnd = function() {
 	if (cardsTurnedOver.length === 16) {
-		alert("Congratulations! You've matched all the card colors correctly.");
+		//Select the 'congrats' feature and add animation to make color change.
+		var congrats = document.getElementById("congrats");
+		congrats.classList.add("animation-class");
+		congratsTimeout();
 		//empty out the shuffledArray so new cards can be added to it.
 		shuffledArray.length = 0;
 		//Invoke shuffleCards function to shuffle cards.
@@ -67,12 +70,17 @@ var checkMatch = function() {
 	if ((cardItems % 2 === 0) && (cardItems !== 0)) {	
 		//Checks the last card and the card before the last in the array to see if they match.
 		if ((cardsTurnedOver[cardItems - 2].textContent === cardsTurnedOver[cardItems - 1].textContent)) {
-			alert(`You've matched the ${(cardsTurnedOver[cardItems - 1].textContent)} cards.`);	
+			//Get 'match' feature and add animation to it to make the button change color.	
+			var getMatch = document.getElementById("match");
+			getMatch.classList.add("animation-class");
+			matchTimeout();
 			//Run checkGameEnd function to see if game is over.
 			checkGameEnd();
 		} else {
-			document.getElementById("divTwo").style;
-			// alert(`Sorry, try again.`);
+			//Get 'no match' feature and add animation to it to make button change color.
+			var noMatch = document.getElementById("noMatch");
+			noMatch.classList.add("animation-class");
+			noMatchTimeout();
 			//console.log(cardsTurnedOver);
 			//If cards don't match, flip the last card and the card before the last in the array (return to original position).
 			//Set the card color and font color to the orignal card. Add event listener so card can be clicked again.
@@ -109,9 +117,8 @@ var flipCard = function(event) {
 //Create a board of cards to play.
 var createCards = function() {
 	//Create a new div- cards container. This will hold the individual card items.
-	var div = document.createElement("div");
-	var divName = div.setAttribute("id", "container");
-	document.body.appendChild(div);
+	var divContainer = document.createElement("div");
+	divContainer.setAttribute("id", "container");
 	//Create each card item, set its text and color. Add event listener and append card to the cards container.
 	for (i = 0; i < 16; i++) {
 		var card = document.createElement("div");
@@ -120,36 +127,70 @@ var createCards = function() {
 		var cardColorName = shuffledArray[i].color;
 		card.textContent = cardColorName;
 		card.addEventListener("click", flipCard);
-		div.appendChild(card);		
+		divContainer.appendChild(card);	
+		document.body.appendChild(divContainer);	
 	}
 }
 createCards();
 
-//Creates 2 button-like items- "Its a match" and "Try again".
-var features = function() {
-	//Create a features div. This will hold 2 divs that contain the 'Its's a match' and 'No match' features.
-	var divFeatures = document.createElement("div");
-	//This is the 1st div for the 'It's a match' feature. Para inside the div has the text.
+//Match alert. This function creates a feature that lights up when cards are matched. 
+var matchAlert = function() {
+	// Para inside the div has the text.
 	var divOne = document.createElement("div");
 	var paraOne = document.createElement("p");
-	divOne.setAttribute("id", "divOne");
+	divOne.setAttribute("id", "match");
 	paraOne.textContent = "Yay! It's a match!";
 	divOne.appendChild(paraOne);
-	divFeatures.appendChild(divOne);
-	//This is the 2nd div for the 'No match' feature. Para inside the div has the text.
+	var divContainer = document.getElementById("container");
+	document.body.insertBefore(divOne, divContainer);
+}
+matchAlert();
+
+//No match. This function creates a features that lights up when cards selected do not match.
+var noMatch = function() {
+	//Para inside the div has the text.
 	var divTwo = document.createElement("div");
 	var paraTwo = document.createElement("p");
-	divTwo.setAttribute("id", "divTwo");
+	divTwo.setAttribute("id", "noMatch");
 	paraTwo.textContent = "No match. Please try again."; 
 	divTwo.appendChild(paraTwo);
-	divFeatures.appendChild(divTwo);
 	var divContainer = document.getElementById("container");
-	var divFeaturesAdded = document.body.insertBefore(divFeatures, divContainer);
+	document.body.insertBefore(divTwo, divContainer);
 }
-features();
+noMatch();
 
+//Congratulations. This function creates a features that lights up when all cards on the board have been matched.
+var congrats = function() {
+	//Para inside the div has the text.
+	var divThree = document.createElement("div");
+	var spanThree = document.createElement("span");
+	spanThree.setAttribute("id", "congrats");
+	spanThree.textContent = "Congratulations! Game over.";
+	divThree.appendChild(spanThree);
+	document.body.appendChild(divThree);
+}
+congrats();
 
+//If there's a match: create a Set timeout to remove animation from Match feature after 2 secs (animation lasts for 1 secs).
+var matchTimeout = function() {
+	var matchTimeout = setTimeout(function() {
+	var getMatch = document.getElementById("match").classList.remove("animation-class");
+	}, 2000);
+}
 
+//If no match: create a Set timeout to remove animation from noMatch feature after 2 secs (animation lasts for 1 secs).
+var noMatchTimeout = function() {
+	var noMatchTimeout = setTimeout(function() {
+	var noMatch = document.getElementById("noMatch").classList.remove("animation-class");
+	}, 2000);
+}
+
+//If no match: create a Set timeout to remove animation from congrats feature after 2 secs (animation lasts for 1 secs).
+var congratsTimeout = function() {
+	var congratsTimeout = setTimeout(function() {
+		var congrats = document.getElementById("congrats").classList.remove("animation-class");
+	}, 2000);
+}
 
 
 
