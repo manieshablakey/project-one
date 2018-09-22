@@ -44,12 +44,16 @@ shuffleCards();
 //New array for cards flipped over.
 var cardsTurnedOver = []; 
 
+//New var for counting number of tries it takes to complete game.
+var count = 0;
+
 // //Check for end of game.
 var checkGameEnd = function() {
 	if (cardsTurnedOver.length === 16) {
 		//Select the 'congrats' feature and add animation to make color change.
 		var congrats = document.getElementById("congrats");
 		congrats.classList.add("animation-class");
+		alert("You completed the game in " + count + " tries.");
 		congratsTimeout();
 		//empty out the shuffledArray so new cards can be added to it.
 		shuffledArray.length = 0;
@@ -71,6 +75,7 @@ var checkMatch = function() {
 		//Checks the last card and the card before the last in the array to see if they match.
 		if ((cardsTurnedOver[cardItems - 2].textContent === cardsTurnedOver[cardItems - 1].textContent)) {
 			//Get 'match' feature and add animation to it to make the button change color.	
+			count++;
 			var getMatch = document.getElementById("match");
 			getMatch.classList.add("animation-class");
 			matchTimeout();
@@ -78,18 +83,21 @@ var checkMatch = function() {
 			checkGameEnd();
 		} else {
 			//Get 'no match' feature and add animation to it to make button change color.
+			count++;
 			var noMatch = document.getElementById("noMatch");
 			noMatch.classList.add("animation-class");
 			noMatchTimeout();
 			//console.log(cardsTurnedOver);
 			//If cards don't match, flip the last card and the card before the last in the array (return to original position).
 			//Set the card color and font color to the orignal card. Add event listener so card can be clicked again.
-			cardsTurnedOver[cardItems - 2].style.backgroundColor = "#588c7e";
-			cardsTurnedOver[cardItems - 2].style.color = "#588c7e";
-			cardsTurnedOver[cardItems - 2].addEventListener("click", flipCard);
-			cardsTurnedOver[cardItems - 1].style.backgroundColor = "#588c7e";
-			cardsTurnedOver[cardItems - 1].style.color = "#588c7e";
-			cardsTurnedOver[cardItems - 1].addEventListener("click", flipCard);
+			var secondLastCard = cardsTurnedOver[cardItems - 2];
+			var lastCard = cardsTurnedOver[cardItems - 1];
+			secondLastCard.style.backgroundColor = "#588c7e";
+			secondLastCard.style.color = "#588c7e";
+			secondLastCard.addEventListener("click", flipCard);
+			lastCard.style.backgroundColor = "#588c7e";
+			lastCard.style.color = "#588c7e";
+			lastCard.addEventListener("click", flipCard);
 			cardsTurnedOver.pop();
 			cardsTurnedOver.pop();	
 		}
@@ -132,44 +140,6 @@ var createCards = function() {
 	}
 }
 createCards();
-
-//Match alert. This function creates a feature that lights up when cards are matched. 
-var matchAlert = function() {
-	// Para inside the div has the text.
-	var divOne = document.createElement("div");
-	var paraOne = document.createElement("p");
-	divOne.setAttribute("id", "match");
-	paraOne.textContent = "Yay! It's a match!";
-	divOne.appendChild(paraOne);
-	var divContainer = document.getElementById("container");
-	document.body.insertBefore(divOne, divContainer);
-}
-matchAlert();
-
-//No match. This function creates a features that lights up when cards selected do not match.
-var noMatch = function() {
-	//Para inside the div has the text.
-	var divTwo = document.createElement("div");
-	var paraTwo = document.createElement("p");
-	divTwo.setAttribute("id", "noMatch");
-	paraTwo.textContent = "No match. Please try again."; 
-	divTwo.appendChild(paraTwo);
-	var divContainer = document.getElementById("container");
-	document.body.insertBefore(divTwo, divContainer);
-}
-noMatch();
-
-//Congratulations. This function creates a features that lights up when all cards on the board have been matched.
-var congrats = function() {
-	//Para inside the div has the text.
-	var divThree = document.createElement("div");
-	var spanThree = document.createElement("span");
-	spanThree.setAttribute("id", "congrats");
-	spanThree.textContent = "Congratulations! Game over.";
-	divThree.appendChild(spanThree);
-	document.body.appendChild(divThree);
-}
-congrats();
 
 //If there's a match: create a Set timeout to remove animation from Match feature after 2 secs (animation lasts for 1 secs).
 var matchTimeout = function() {

@@ -6,8 +6,7 @@
    justify-content: center;
    align-items: center;
    margin: 20px auto;
-   width: 1200px;
-
+   width: 100%;
 }
 
 /*Each individual card item.*/
@@ -33,9 +32,17 @@ h1 {
 	margin: 0px 10px;
 	text-align: center;
 	font-weight: bold;
-	font-size: 80px;
+	font-size: 60px;
 	text-shadow: 2px 2px;
 	font-family: "Walter Turncoat", cursive;
+}
+
+#features {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 10px auto;
 }
 
 /*Button-like feature: 'It's a match'*/
@@ -46,10 +53,10 @@ h1 {
 	border-radius: 10px;
 	background-color:  #fefbd8;
 	color: #c83349;
-	padding: 5px 20px 5px 5px;
-	margin: 20px 50px 20px 20px;
-	float: right;
+	width: 300px;
 	text-shadow: 1px 1px;
+	text-align: center;
+	margin: 0 auto;
 }
 
 /*Button-like feature: "No match"*/
@@ -60,11 +67,12 @@ h1 {
 	border-radius: 10px;
 	background-color:  #fefbd8;
 	color: #c83349;
-	padding: 5px;
-	margin: 20px 20px 20px 50px;
-	float: left;
+	width: 300px;
 	text-shadow: 1px 1px;
+	text-align: center;
+	margin: 0 auto;
 }
+
 
 /*Button-like feature: "No match"*/
 #congrats {
@@ -74,11 +82,10 @@ h1 {
 	border-radius: 10px;
 	background-color:  #fefbd8;
 	color: #c83349;
-	padding: 10px;
-	width: 100px;
-	margin: 20px 400px 20px 400px;
-	text-align: center;
+	width: 300px;
 	text-shadow: 1px 1px;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .animation-class {
